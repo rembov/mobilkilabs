@@ -1,3 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AlekseevAbsalyamov</string>
+
+    <!-- Общие -->
+    <string name="logo_desc">Логотип приложения</string>
+    <string name="btn_exit">Выход</string>
+    <string name="no_data">—</string>
+
+    <!-- Окно «Приветствие» (вход) -->
+    <string name="title_login">Приветствие</string>
+    <string name="hint_login">Логин</string>
+    <string name="hint_password">Пароль</string>
+    <string name="btn_login">Вход</string>
+    <string name="btn_register">Регистрация</string>
+    <string name="toast_empty_fields">Заполните все поля</string>
+    <string name="toast_login_success">Вход выполнен</string>
+
+    <!-- Окно «Регистрация» -->
+    <string name="title_register">Регистрация</string>
+    <string name="hint_name">Имя</string>
+    <string name="hint_surname">Фамилия</string>
+    <string name="hint_email">Email</string>
+    <string name="btn_register_submit">Зарегистрироваться</string>
+    <string name="btn_cancel">Отмена</string>
+    <string name="toast_reg_success">Регистрация выполнена</string>
+
+    <!-- Окно «Меню» -->
+    <string name="title_menu">Меню</string>
+    <string name="greeting_fmt">Вы вошли как: %1$s</string>
+    <string name="btn_start">Старт</string>
+    <string name="btn_profile">Профиль</string>
+    <string name="btn_settings">Настройки</string>
+    <string name="btn_report">Сообщить о проблеме</string>
+    <string name="toast_start">Старт</string>
+    <string name="toast_no_app">Нет приложения для почты или звонков</string>
+
+    <!-- Окно «Профиль» -->
+    <string name="title_profile">Профиль</string>
+    <string name="label_name">Имя</string>
+    <string name="label_surname">Фамилия</string>
+    <string name="label_login">Логин</string>
+    <string name="label_email">Email</string>
+
+    <!-- Окно «Настройки» -->
+    <string name="title_settings">Настройки</string>
+    <string name="day_night_desc">Смена стиля День/Ночь</string>
+    <string name="night_mode">Ночной режим</string>
 </resources>
