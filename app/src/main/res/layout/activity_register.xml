@@ -22,28 +22,10 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/nameField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:hint="@string/hint_name"
-            android:inputType="textPersonName"
-            android:importantForAutofill="no" />
-
-        <EditText
-            android:id="@+id/surnameField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="@string/hint_surname"
-            android:inputType="textPersonName"
-            android:importantForAutofill="no" />
-
-        <EditText
             android:id="@+id/loginField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:hint="@string/hint_login"
             android:inputType="text"
             android:importantForAutofill="no" />
@@ -52,25 +34,80 @@
             android:id="@+id/passwordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
             android:importantForAutofill="no" />
 
         <EditText
-            android:id="@+id/emailField"
+            android:id="@+id/fioField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="@string/hint_email"
-            android:inputType="textEmailAddress"
+            android:layout_marginTop="8dp"
+            android:hint="@string/hint_fio"
+            android:inputType="textPersonName"
             android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/birthField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/hint_birth"
+            android:inputType="date"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_gender"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/genderGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender_m" />
+
+            <RadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/gender_f" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_avatar"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/avatarView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/label_avatar"
+            android:scaleType="fitCenter"
+            android:src="@drawable/avatar1" />
 
         <Button
             android:id="@+id/registerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:text="@string/btn_register_submit" />
 
         <Button
@@ -79,6 +116,5 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/btn_cancel" />
-
     </LinearLayout>
 </ScrollView>

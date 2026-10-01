@@ -1,111 +1,95 @@
 package com.example.alekseevabsalyamov
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.alekseevabsalyamov.R
 
 class RegisterActivity : AppCompatActivity() {
 
     private val activityTag = "RegisterActivity"
-    private lateinit var nameField: EditText
-    private lateinit var surnameField: EditText
     private lateinit var loginField: EditText
     private lateinit var passwordField: EditText
-    private lateinit var emailField: EditText
+    private lateinit var fioField: EditText
+    private lateinit var birthField: EditText
+    private lateinit var genderGroup: RadioGroup
+    private lateinit var avatarView: ImageView
+
+    private var avatarIndex = 0
+    private val avatars = intArrayOf(
+        R.drawable.avatar1, R.drawable.avatar2, R.drawable.avatar3
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_register)
-        applySystemBarInsets(findViewById(R.id.main))
-        Log.i(activityTag, "onCreate")
 
-        nameField = findViewById(R.id.nameField)
-        surnameField = findViewById(R.id.surnameField)
         loginField = findViewById(R.id.loginField)
         passwordField = findViewById(R.id.passwordField)
-        emailField = findViewById(R.id.emailField)
+        fioField = findViewById(R.id.fioField)
+        birthField = findViewById(R.id.birthField)
+        genderGroup = findViewById(R.id.genderGroup)
+        avatarView = findViewById(R.id.avatarView)
 
         if (savedInstanceState != null) {
-            nameField.setText(savedInstanceState.getString("name"))
-            surnameField.setText(savedInstanceState.getString("surname"))
             loginField.setText(savedInstanceState.getString("login"))
             passwordField.setText(savedInstanceState.getString("password"))
-            emailField.setText(savedInstanceState.getString("email"))
+            fioField.setText(savedInstanceState.getString("fio"))
+            birthField.setText(savedInstanceState.getString("birth"))
+            avatarIndex = savedInstanceState.getInt("avatarIndex", 0)
+            val genderId = savedInstanceState.getInt("genderId", -1)
+            if (genderId != -1) genderGroup.check(genderId)
+        }
+        avatarView.setImageResource(avatars[avatarIndex])
+
+        avatarView.setOnClickListener {
+            avatarIndex = (avatarIndex + 1) % avatars.size
+            avatarView.setImageResource(avatars[avatarIndex])
+            Log.i(activityTag, getString(R.string.log_avatar) + ": №" + (avatarIndex + 1) + " из " + avatars.size)
         }
 
         findViewById<Button>(R.id.registerButton).setOnClickListener {
-            val name = nameField.text.toString().trim()
-            val surname = surnameField.text.toString().trim()
             val login = loginField.text.toString().trim()
             val password = passwordField.text.toString()
-            val email = emailField.text.toString().trim()
-            if (name.isEmpty() || surname.isEmpty() || login.isEmpty() || password.isEmpty()) {
+            val fio = fioField.text.toString().trim()
+            val birth = birthField.text.toString().trim()
+            if (login.isEmpty() || password.isEmpty() || fio.isEmpty() || birth.isEmpty()) {
                 Toast.makeText(this, getString(R.string.toast_empty_fields), Toast.LENGTH_SHORT).show()
             } else {
-                saveRegistration(name, surname, login, password, email)
+                val genderRadio =
+                    findViewById<RadioButton>(genderGroup.checkedRadioButtonId)
+                val genderText = genderRadio?.text?.toString() ?: "-"
+                Users.list.add("$fio ($login)")
+                Log.i(
+                    activityTag,
+                    getString(R.string.log_registered) + ": логин = " + login + ", ФИО = " + fio +
+                            ", дата рождения = " + birth + ", пол = " + genderText +
+                            ", аватар №" + (avatarIndex + 1)
+                )
                 Toast.makeText(this, getString(R.string.toast_reg_success), Toast.LENGTH_LONG).show()
                 finish()
             }
         }
 
         findViewById<Button>(R.id.cancelButton).setOnClickListener {
+            Log.i(activityTag, getString(R.string.log_cancel))
             finish()
         }
     }
 
-    private fun saveRegistration(name: String, surname: String, login: String, password: String, email: String) {
-        getSharedPreferences("registration", Context.MODE_PRIVATE)
-            .edit()
-            .putString("name", name)
-            .putString("surname", surname)
-            .putString("login", login)
-            .putString("password", password)
-            .putString("email", email)
-            .apply()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.i(activityTag, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.i(activityTag, "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.i(activityTag, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.i(activityTag, "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i(activityTag, "onDestroy")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.i(activityTag, "onRestart")
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("name", nameField.text.toString())
-        outState.putString("surname", surnameField.text.toString())
         outState.putString("login", loginField.text.toString())
         outState.putString("password", passwordField.text.toString())
-        outState.putString("email", emailField.text.toString())
+        outState.putString("fio", fioField.text.toString())
+        outState.putString("birth", birthField.text.toString())
+        outState.putInt("avatarIndex", avatarIndex)
+        outState.putInt("genderId", genderGroup.checkedRadioButtonId)
     }
 }
