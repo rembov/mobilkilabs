@@ -1,6 +1,10 @@
 package com.example.alekseevabsalyamov
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -10,6 +14,7 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.alekseevabsalyamov.R
+import java.util.Calendar
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -25,6 +30,28 @@ class RegisterActivity : AppCompatActivity() {
     private val avatars = intArrayOf(
         R.drawable.avatar1, R.drawable.avatar2, R.drawable.avatar3
     )
+
+    private fun isValidDate(text: String): Boolean {
+        val match = Regex("""(\d{2})\.(\d{2})\.(\d{4})""").matchEntire(text) ?: return false
+        val (dayStr, monthStr, yearStr) = match.destructured
+        val year = yearStr.toInt()
+        if (year < 1900 || year > 2099) return false
+        val calendar = Calendar.getInstance()
+        calendar.isLenient = false
+        calendar.clear()
+        calendar.set(year, monthStr.toInt() - 1, dayStr.toInt())
+        return try {
+            calendar.time
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private fun highlightBirth() {
+        val valid = isValidDate(birthField.text.toString().trim())
+        birthField.backgroundTintList = if (valid) null else ColorStateList.valueOf(Color.RED)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +81,27 @@ class RegisterActivity : AppCompatActivity() {
             Log.i(activityTag, getString(R.string.log_avatar) + ": №" + (avatarIndex + 1) + " из " + avatars.size)
         }
 
+        birthField.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s == null) return
+                val digits = s.toString().filter { it.isDigit() }.take(8)
+                val formatted = StringBuilder()
+                digits.forEachIndexed { i, ch ->
+                    if (i == 2 || i == 4) formatted.append('.')
+                    formatted.append(ch)
+                }
+                if (formatted.toString() != s.toString()) {
+                    s.replace(0, s.length, formatted)
+                } else {
+                    highlightBirth()
+                }
+            }
+        })
+
         findViewById<Button>(R.id.registerButton).setOnClickListener {
             val login = loginField.text.toString().trim()
             val password = passwordField.text.toString()
@@ -61,6 +109,10 @@ class RegisterActivity : AppCompatActivity() {
             val birth = birthField.text.toString().trim()
             if (login.isEmpty() || password.isEmpty() || fio.isEmpty() || birth.isEmpty()) {
                 Toast.makeText(this, getString(R.string.toast_empty_fields), Toast.LENGTH_SHORT).show()
+                highlightBirth()
+            } else if (!isValidDate(birth)) {
+                highlightBirth()
+                Toast.makeText(this, getString(R.string.toast_invalid_date), Toast.LENGTH_SHORT).show()
             } else {
                 val genderRadio =
                     findViewById<RadioButton>(genderGroup.checkedRadioButtonId)

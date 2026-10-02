@@ -34,6 +34,7 @@
     <string name="day_night_desc">Переключение темы</string>
     <string name="no_data">Нет данных</string>
     <string name="toast_empty_fields">Заполните все поля</string>
+    <string name="toast_invalid_date">Неверный формат даты (ДД.ММ.ГГГГ)</string>
     <string name="toast_login_success">Вход выполнен</string>
     <string name="toast_reg_success">Регистрация пройдена</string>
     <string name="toast_start">Приложение запущено</string>
