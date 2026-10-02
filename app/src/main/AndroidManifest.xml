@@ -12,17 +12,9 @@
         android:theme="@style/Theme.MyApplication">
         <activity
             android:name=".HelloActivity"
+            android:clearTaskOnLaunch="true"
             android:exported="true"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="true"
-            android:label="@string/title_register"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".UserListActivity"
-            android:exported="true"
-            android:label="@string/title_users">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,17 +27,26 @@
             android:label="@string/title_login"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name=".RegisterActivity"
+            android:exported="false"
+            android:label="@string/title_register"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false"
             android:label="@string/title_menu" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false"
+            android:label="@string/title_profile" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:label="@string/title_settings" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".UserListActivity"
             android:exported="false"
-            android:label="@string/title_profile" />
+            android:label="@string/title_users" />
     </application>
 
 </manifest>

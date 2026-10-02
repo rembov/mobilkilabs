@@ -1,5 +1,6 @@
 package com.example.alekseevabsalyamov
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -18,6 +19,10 @@ class HelloActivity : AppCompatActivity() {
         button1.setOnClickListener {
             button1.text = getString(R.string.btn_pressed)
             Log.i(activityTag, getString(R.string.log_press) + ": кнопка «" + getString(R.string.btn_press) + "», текст изменён на «" + getString(R.string.btn_pressed) + "»")
+        }
+
+        findViewById<Button>(R.id.continueButton).setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 }

@@ -23,7 +23,8 @@
     <string name="btn_settings">Настройки</string>
     <string name="btn_profile">Профиль</string>
     <string name="btn_report">Отчёт</string>
-    <string name="btn_start">Начать</string>
+    <string name="btn_start">Приветствие</string>
+    <string name="btn_users">Список пользователей</string>
     <string name="label_name">Имя</string>
     <string name="label_surname">Фамилия</string>
     <string name="label_login">Логин</string>
@@ -42,6 +43,7 @@
     <string name="hello_text">Hello!</string>
     <string name="btn_press">Нажми!</string>
     <string name="btn_pressed">НАЖАТО!</string>
+    <string name="btn_continue">Продолжить</string>
     <string name="hint_fio">ФИО</string>
     <string name="hint_birth">Дата рождения (ДД.ММ.ГГГГ)</string>
     <string name="label_gender">Пол</string>

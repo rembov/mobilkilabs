@@ -65,6 +65,16 @@ class RegisterActivity : AppCompatActivity() {
                 val genderRadio =
                     findViewById<RadioButton>(genderGroup.checkedRadioButtonId)
                 val genderText = genderRadio?.text?.toString() ?: "-"
+
+                val fioParts = fio.split(" ", limit = 2)
+                getSharedPreferences("registration", android.content.Context.MODE_PRIVATE)
+                    .edit()
+                    .putString("name", fioParts.getOrElse(0) { "" })
+                    .putString("surname", fioParts.getOrElse(1) { "" })
+                    .putString("login", login)
+                    .putString("email", "")
+                    .apply()
+
                 Users.list.add("$fio ($login)")
                 Log.i(
                     activityTag,
