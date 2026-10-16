@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.example.composelab5.app-debug-36:/drawable_avatar2.xml.flat",
+        "source": "com.example.composelab5.app-main-38:/drawable/avatar2.xml"
+    },
+    {
+        "merged": "com.example.composelab5.app-debug-36:/drawable_ic_launcher.xml.flat",
+        "source": "com.example.composelab5.app-main-38:/drawable/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.composelab5.app-debug-36:/drawable_avatar1.xml.flat",
+        "source": "com.example.composelab5.app-main-38:/drawable/avatar1.xml"
+    },
+    {
+        "merged": "com.example.composelab5.app-debug-36:/drawable_avatar3.xml.flat",
+        "source": "com.example.composelab5.app-main-38:/drawable/avatar3.xml"
+    }
+]
